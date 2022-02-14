@@ -7,8 +7,9 @@ class MoviesController < ApplicationController
     end
   
     def index
-      @sort_param = params[:sort]
+      @sort_param = sort_param
       @rating_filter_param = rating_filer_params
+      reset_session
       @all_ratings = Movie.all_ratings
 
       if @sort_param
@@ -53,9 +54,19 @@ class MoviesController < ApplicationController
       params.require(:movie).permit(:title, :rating, :description, :release_date)
     end
 
+    def sort_param
+      return session[:sort_param] if params[:sort].nil?
+      session[:sort_param] = params[:sort]
+    end
+
+    def reset_session
+      session[:sort_param] = @sort_param
+      session[:rating_filter_param] = @rating_filter_param
+    end
+
     def rating_filer_params
-      return nil if params[:ratings].nil?
-      return params[:ratings] if params[:ratings].is_a?(Array)
-      params[:ratings].keys
+      return session[:rating_filter_param] if params[:ratings].nil?
+      return session[:rating_filter_param] = params[:ratings] if params[:ratings].is_a?(Array)
+      session[:rating_filter_param] = params[:ratings].keys
     end
   end
