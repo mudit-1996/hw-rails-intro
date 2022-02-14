@@ -3,7 +3,7 @@
 
 <%#  Part 2: Start here... %>
 
-<%= form_tag(movies_path, method: :get) do %>
+<%= form_tag(movies_path, method: :get, id: 'ratings_form') do %>
   Include:
   <br />
   <table>
@@ -14,7 +14,7 @@
       </tr>
     <% end %>
   </table>
-  <%= submit_tag 'Refresh', class: 'btn btn-primary' %>
+  <%= submit_tag 'Submit', class: 'btn btn-primary', id: 'ratings_submit'%>
 <% end %>
 <br />
 
