@@ -9,7 +9,6 @@ class MoviesController < ApplicationController
     def index
       @sort_param = sort_param
       @rating_filter_param = rating_filer_params
-      reset_session
       @all_ratings = Movie.all_ratings
 
       if @sort_param
@@ -57,11 +56,6 @@ class MoviesController < ApplicationController
     def sort_param
       return session[:sort_param] if params[:sort].nil?
       session[:sort_param] = params[:sort]
-    end
-
-    def reset_session
-      session[:sort_param] = @sort_param
-      session[:rating_filter_param] = @rating_filter_param
     end
 
     def rating_filer_params
