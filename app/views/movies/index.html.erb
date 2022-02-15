@@ -10,7 +10,7 @@
     <% @all_ratings.each do |rating| %>
       <tr>
         <td><%= rating %></td>
-        <td><%= check_box_tag("ratings[#{rating}]", "1", rating.in?(@rating_filter_param)) %></td>
+        <td><%= check_box_tag("ratings[#{rating}]", "1", rating.in?(@rating_filter_param||[])) %></td>
       </tr>
     <% end %>
   </table>
